@@ -1,0 +1,33 @@
+.main-weather-details {
+  border-radius: 5px;
+  background-color: rgb(181, 239, 181);
+  height: calc(100% - 125px);
+  display: flex;
+  flex-direction: column;
+
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    background-color: lightsalmon;
+    height: 20%;
+    .city-name {
+      background-color: rgb(44, 172, 44);
+    }
+
+    .favorite-btn {
+      background-color: lightblue;
+    }
+  }
+
+  .description {
+    height: 40%;
+    background-color: lightslategrey;
+  }
+
+  .list {
+    height: 40%;
+    background-color: lightcoral;
+  }
+}
