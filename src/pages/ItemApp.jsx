@@ -13,13 +13,14 @@ export const ItemApp = (props) => {
 
   const [cityTxt, setCityTxt] = useState('')
 
-  const { locationKeys } = useSelector((state) => state.weatherModule)
-  const { currentWeather } = useSelector((state) => state.weatherModule)
+  const { locationsKeys } = useSelector((state) => state.weatherModule)
+  const { currentWeathers } = useSelector((state) => state.weatherModule)
   const { autoCompleteWords } = useSelector((state) => state.weatherModule)
-  const { fiveDaysDailyForcast } = useSelector((state) => state.weatherModule)
+  const { fiveDaysDailyForcasts } = useSelector((state) => state.weatherModule)
+  const { mainLocationKeyToShow } = useSelector((state) => state.weatherModule)
 
   const onLoadWeather = async (cityTxt) => {
-    dispatch(getWeather(cityTxt))
+    const { locationKey } = await dispatch(getWeather(cityTxt))
   }
 
   const loadAutocompelteWords = (txt) => {
@@ -39,8 +40,10 @@ export const ItemApp = (props) => {
         cityTxt={cityTxt}
       />
       <MainWeatherDetails
-        currentWeather={currentWeather}
-        fiveDaysDailyForcast={fiveDaysDailyForcast}
+        currentWeathers={currentWeathers}
+        fiveDaysDailyForcasts={fiveDaysDailyForcasts}
+        locationsKeys={locationsKeys}
+        mainLocationKeyToShow={mainLocationKeyToShow}
       />
     </section>
   )

@@ -37,7 +37,17 @@ export function getWeather(cityTxt) {
         },
       })
 
-      return { locationData, currentWeatherData, fiveDaysDailyForcastData }
+      dispatch({
+        type: 'SET_MAIN_LOCATION_TO_SHOW',
+        locationKey: locationData.Key,
+      })
+
+      return {
+        locationData,
+        currentWeatherData,
+        fiveDaysDailyForcastData,
+        locationKey: locationData.Key,
+      }
     } catch (err) {
       console.log('err:', err)
     }

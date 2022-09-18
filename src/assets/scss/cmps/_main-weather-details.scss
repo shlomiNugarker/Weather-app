@@ -1,33 +1,72 @@
 .main-weather-details {
   border-radius: 5px;
-  background-color: rgb(181, 239, 181);
+  // background-color: rgb(181, 239, 181);
   height: calc(100% - 125px);
   display: flex;
   flex-direction: column;
+
+  .title {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    font-size: 24px;
+  }
 
   .top {
     display: flex;
     justify-content: space-between;
     align-content: center;
     align-items: center;
-    background-color: lightsalmon;
+    // background-color: lightsalmon;
     height: 20%;
     .city-name {
-      background-color: rgb(44, 172, 44);
+      // background-color: rgb(44, 172, 44);
+      font-size: 24px;
+      text-align: center;
     }
 
     .favorite-btn {
-      background-color: lightblue;
+      // background-color: lightblue;
+      div {
+        span {
+          font-size: 36px;
+        }
+      }
     }
   }
 
   .description {
     height: 40%;
-    background-color: lightslategrey;
+    // background-color: lightslategrey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .WeatherText {
+      h1 {
+        font-size: 30px;
+      }
+    }
   }
 
   .list {
-    height: 40%;
-    background-color: lightcoral;
+    min-height: 40%;
+    // background-color: lightcoral;
+    display: flex;
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      // background-color: lightgray;
+      padding: 3px;
+      text-align: center;
+      width: 20%;
+
+      div {
+        width: 100%;
+      }
+    }
   }
 }
