@@ -4,45 +4,42 @@ import { Link } from 'react-router-dom'
 import { Input } from '../cmps/Input'
 import { MainWeatherDetails } from '../cmps/MainWeatherDetails'
 import {
-  getCurrentWeather,
   getLocationAutoComplete,
-  loadExistDataFromStorage,
+  getWeather,
 } from '../store/actions/weatherActions'
 
 export const ItemApp = (props) => {
   const dispatch = useDispatch()
-  const { autoCompleteWords } = useSelector((state) => state.weatherModule)
-  const { locations } = useSelector((state) => state.weatherModule)
-  const { fiveDaysDailyForcast } = useSelector((state) => state.weatherModule)
-  const [currWeather, setCurrWeather] = useState(null)
 
-  const loadCurrWeather = async (cityTxt) => {
-    var res = await dispatch(getCurrentWeather(cityTxt))
-    console.log('set', res)
-    setCurrWeather({ cityTxt, data: res })
+  const [cityTxt, setCityTxt] = useState('')
+
+  const { locationKeys } = useSelector((state) => state.weatherModule)
+  const { currentWeather } = useSelector((state) => state.weatherModule)
+  const { autoCompleteWords } = useSelector((state) => state.weatherModule)
+  const { fiveDaysDailyForcast } = useSelector((state) => state.weatherModule)
+
+  const onLoadWeather = async (cityTxt) => {
+    dispatch(getWeather(cityTxt))
   }
 
   const loadAutocompelteWords = (txt) => {
     dispatch(getLocationAutoComplete(txt))
   }
-  const onLoadExistDataFromStorage = () => {
-    dispatch(loadExistDataFromStorage())
-  }
 
   useEffect(() => {
-    onLoadExistDataFromStorage()
-    loadCurrWeather('haifa')
-    // loadAutocompelteWords('t')
+    onLoadWeather('haifa')
+    loadAutocompelteWords('t')
   }, [])
 
   return (
     <section className="item-app">
       <Input
         autoCompleteWords={autoCompleteWords}
-        // loadAutocompelteWords={loadAutocompelteWords}
+        setCityTxt={setCityTxt}
+        cityTxt={cityTxt}
       />
       <MainWeatherDetails
-        currWeather={currWeather}
+        currentWeather={currentWeather}
         fiveDaysDailyForcast={fiveDaysDailyForcast}
       />
     </section>

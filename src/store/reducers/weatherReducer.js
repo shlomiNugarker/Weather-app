@@ -1,7 +1,7 @@
 const INITIAL_STATE = {
-  locations: {},
+  locationKeys: {},
   currentWeather: {},
-  autoCompleteWords: ['TEl Aviv', 'Jerusalem', 'Haifa'],
+  autoCompleteWords: [],
   fiveDaysDailyForcast: {},
 }
 
@@ -10,9 +10,9 @@ export function weatherReducer(state = INITIAL_STATE, action) {
     case 'SET_LOCATION_KEY':
       return {
         ...state,
-        locations: {
-          ...state.locations,
-          [action.location.cityTxt]: action.location.locationKey,
+        locationKeys: {
+          ...state.locationKeys,
+          [action.locationData.Key]: action.locationData,
         },
       }
     case 'SET_CURRENT_WEATHER':
@@ -20,7 +20,7 @@ export function weatherReducer(state = INITIAL_STATE, action) {
         ...state,
         currentWeather: {
           ...state.currentWeather,
-          [action.currentWeather.cityTxt]: action.currentWeather.data,
+          [action.currentWeatherData.locationKey]: action.currentWeatherData,
         },
       }
     case 'SET_AUTO_COMPLETE_WORDS':
@@ -39,8 +39,8 @@ export function weatherReducer(state = INITIAL_STATE, action) {
         ...state,
         fiveDaysDailyForcast: {
           ...state.fiveDaysDailyForcast,
-          [action.fiveDaysDailyForcast.cityTxt]:
-            action.fiveDaysDailyForcast.data,
+          [action.fiveDaysDailyForcastData.locationKey]:
+            action.fiveDaysDailyForcastData,
         },
       }
 

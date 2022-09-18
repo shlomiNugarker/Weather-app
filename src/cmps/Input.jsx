@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export function Input({ autoCompleteWords, loadAutocompelteWords }) {
-  const [cityTxt, setCityTxt] = useState('')
-
-  // const { loggedInUser } = useSelector((state) => state.userModule)
+export function Input({ autoCompleteWords, setCityTxt, cityTxt }) {
   function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
@@ -97,7 +94,7 @@ export function Input({ autoCompleteWords, loadAutocompelteWords }) {
     }
     function closeAllLists(elmnt) {
       /*close all autocomplete lists in the document,
-except the one passed as an argument:*/
+      except the one passed as an argument:*/
       var x = document.getElementsByClassName('autocomplete-items')
       for (var i = 0; i < x.length; i++) {
         if (elmnt != x[i] && elmnt != inp) {
@@ -114,12 +111,9 @@ except the one passed as an argument:*/
   const handleChange = ({ target }) => {
     const value = target.type === 'number' ? +target.value || '' : target.value
     setCityTxt(value)
-    // loadAutocompelteWords(value)
   }
 
   useEffect(() => {
-    console.log(autoCompleteWords)
-
     autocomplete(document.querySelector('#myInput'), autoCompleteWords)
 
     return () => {}
