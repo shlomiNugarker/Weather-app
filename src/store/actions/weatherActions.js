@@ -11,7 +11,7 @@ export function getWeather(cityTxt) {
         locationData,
       })
 
-      // console.log(locationData)
+      console.log(locationData)
 
       const currentWeatherData = await weatherService.getCurrentWeather(
         locationData

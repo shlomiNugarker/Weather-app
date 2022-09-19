@@ -14,11 +14,11 @@ const API_KEY = 'iRLFvsQPAdFIsRttg2GNGzUUUWtNT06T'
 
 async function getLocationKey(cityTxt) {
   try {
-    // const res = await axios.get(
-    //   `http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${API_KEY}&q=${cityTxt}`
-    // )
+    const res = await axios.get(
+      `http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${API_KEY}&q=${cityTxt}`
+    )
 
-    const res = { data: [tempLocationKeyData] }
+    // const res = { data: [tempLocationKeyData] }
     // console.log(res.data[0])
 
     return res.data[0]
@@ -29,11 +29,11 @@ async function getLocationKey(cityTxt) {
 
 async function getCurrentWeather(locationData) {
   try {
-    // const res = await axios.get(
-    //   `http://dataservice.accuweather.com/currentconditions/v1/${locationData.Key}?apikey=${API_KEY}`
-    // )
+    const res = await axios.get(
+      `http://dataservice.accuweather.com/currentconditions/v1/${locationData.Key}?apikey=${API_KEY}`
+    )
 
-    const res = { data: [tempCurrWeatherData] }
+    // const res = { data: [tempCurrWeatherData] }
 
     return { ...res.data[0], locationKey: locationData.Key }
   } catch (err) {
@@ -43,11 +43,11 @@ async function getCurrentWeather(locationData) {
 
 async function getFiveDaysDailyForcast(locationData) {
   try {
-    // const res = await axios.get(
-    //   `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationData.Key}?apikey=${API_KEY}`
-    // )
+    const res = await axios.get(
+      `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationData.Key}?apikey=${API_KEY}`
+    )
 
-    const res = { data: tempFiveDailyDaysData }
+    // const res = { data: tempFiveDailyDaysData }
 
     // console.log(res.data)
 
@@ -59,12 +59,15 @@ async function getFiveDaysDailyForcast(locationData) {
 
 async function getLocationAutoComplete(txt) {
   try {
-    // const res = await axios.get(
-    //   `http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${API_KEY}&q=${txt}`
-    // )
-    const res = { data: tempLocationAutoCompleteData }
+    const res = await axios.get(
+      `http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${API_KEY}&q=${txt}`
+    )
+    // const res = { data: tempLocationAutoCompleteData }
 
-    // console.log(res.data)
+    console.log(res.data)
+    // let dataStorage = storageService.load(STORAGE_KEY)
+    // let dataStorageToUpdate.autoCompleteWords = [...dataStorage.autoCompleteWords, ...res.data]
+    // storageService.store(STORAGE_KEY,)
 
     const wordsToReturn = res.data.map((city) => city.LocalizedName)
     return wordsToReturn

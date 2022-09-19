@@ -8,6 +8,8 @@ import {
   getWeather,
 } from '../store/actions/weatherActions'
 
+import { useEffectUpdate } from '../hooks/useEffectUpdate'
+
 export const ItemApp = (props) => {
   const dispatch = useDispatch()
 
@@ -20,7 +22,7 @@ export const ItemApp = (props) => {
   const { mainLocationKeyToShow } = useSelector((state) => state.weatherModule)
 
   const onLoadWeather = async (cityTxt) => {
-    const { locationKey } = await dispatch(getWeather(cityTxt))
+    await dispatch(getWeather(cityTxt))
   }
 
   const loadAutocompelteWords = (txt) => {
@@ -28,9 +30,12 @@ export const ItemApp = (props) => {
   }
 
   useEffect(() => {
-    onLoadWeather('haifa')
-    loadAutocompelteWords('t')
+    // onLoadWeather('tel aviv')
   }, [])
+
+  useEffectUpdate(() => {
+    // loadAutocompelteWords(cityTxt)
+  }, [cityTxt])
 
   return (
     <section className="item-app">
@@ -38,6 +43,7 @@ export const ItemApp = (props) => {
         autoCompleteWords={autoCompleteWords}
         setCityTxt={setCityTxt}
         cityTxt={cityTxt}
+        onLoadWeather={onLoadWeather}
       />
       <MainWeatherDetails
         currentWeathers={currentWeathers}

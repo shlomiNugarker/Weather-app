@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react'
 
-export function Input({ autoCompleteWords, setCityTxt, cityTxt }) {
+export function Input({
+  autoCompleteWords,
+  setCityTxt,
+  cityTxt,
+  onLoadWeather,
+}) {
   function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
@@ -71,6 +76,7 @@ export function Input({ autoCompleteWords, setCityTxt, cityTxt }) {
           if (x) x[currentFocus].click()
           console.log(currentFocus)
           console.log(autoCompleteWords[currentFocus]) ///////////////////// my msg: here I get the word
+          onLoadWeather(autoCompleteWords[currentFocus])
         }
       }
     })
@@ -110,20 +116,29 @@ export function Input({ autoCompleteWords, setCityTxt, cityTxt }) {
 
   const handleChange = ({ target }) => {
     const value = target.type === 'number' ? +target.value || '' : target.value
+    console.log(value)
     setCityTxt(value)
   }
 
   useEffect(() => {
+    // console.log(autoCompleteWords)
     autocomplete(document.querySelector('#myInput'), autoCompleteWords)
 
     return () => {}
-  }, [autoCompleteWords])
+  }, [autoCompleteWords, autocomplete])
 
   /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
   //   autocomplete(document.querySelector('#myInput'), countries)
 
   return (
-    <form autoComplete="off" className="input-cmp">
+    <form
+      autoComplete="on"
+      className="input-cmp"
+      onSubmit={(ev) => {
+        ev.preventDefault()
+        onLoadWeather(cityTxt)
+      }}
+    >
       <div className="autocomplete">
         <input
           onChange={handleChange}

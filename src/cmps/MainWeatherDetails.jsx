@@ -12,7 +12,7 @@ export function MainWeatherDetails({
   const [fiveDailyDaysforcast, setFiveDailyDaysforcast] = useState(null)
 
   useEffect(() => {
-    console.log(fiveDaysDailyForcasts[mainLocationKeyToShow])
+    // console.log(fiveDaysDailyForcasts[mainLocationKeyToShow])
     // console.log(locationsKeys[mainLocationKeyToShow])
     setcurrLocation(locationsKeys[mainLocationKeyToShow])
     setcurrWeather(currentWeathers[mainLocationKeyToShow])
